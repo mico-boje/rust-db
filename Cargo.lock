@@ -391,7 +391,9 @@ dependencies = [
 name = "db_test"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "async-std",
+ "dotenvy",
  "random_name_generator",
  "sqlx",
 ]

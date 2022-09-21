@@ -1,16 +1,9 @@
 use sqlx::{postgres::PgPoolOptions, Postgres, Pool};
 use rnglib::{RNG, Language};
-// use sqlx::mysql::MySqlPoolOptions;
-// etc.
 
 #[async_std::main]
-// or #[tokio::main]
-// or #[actix_web::main]
 async fn main() -> Result<(), sqlx::Error> {
     // Create a connection pool
-    //  for MySQL, use MySqlPoolOptions::new()
-    //  for SQLite, use SqlitePoolOptions::new()
-    //  etc.
     let pool = PgPoolOptions::new()
         .max_connections(5)
         .connect("postgres://postgres:localdb@localhost/postgres").await?;
@@ -58,12 +51,10 @@ pub async fn create_user_table(pool: &Pool<Postgres>) -> Result<(), sqlx::Error>
 }
 
 pub async fn create_user(pool: &Pool<Postgres>, name: String) -> Result<(), sqlx::Error> {
-
     // Insert some users into the database
     sqlx::query("INSERT INTO Users (name) VALUES ($1)")
         .bind(name)
         .execute(pool)
         .await?;
-
     Ok(())
 }
